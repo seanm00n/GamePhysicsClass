@@ -21,7 +21,7 @@ public:
             }
         }
     }
-
+    //setMag() = ->normalize()->mult()
     // 내적 연산
     static float dot(const Vector2D& v1, const Vector2D& v2)
     {

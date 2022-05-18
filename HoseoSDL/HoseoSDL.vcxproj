@@ -154,7 +154,7 @@
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\Vector2D.h" />
     <ClInclude Include="include\Vehicle.h" />
-    <ClInclude Include="src\Walker.h" />
+    <ClInclude Include="include\Walker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
