@@ -19,6 +19,7 @@ Walker::Walker(int x, int y)
 
 void Walker::update()
 {
+	//왜 안움직이는거지?!??!????!!
 	mouse = TheInputHandler::Instance()->getMousePosition();
 	Vector2D* steering;
 	steering = ship->flee(mouse);
