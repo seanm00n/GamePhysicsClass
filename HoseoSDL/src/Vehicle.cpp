@@ -23,7 +23,7 @@ Vector2D* Vehicle::seek(Vector2D* target, int mod) {
 	Vector2D* force = new Vector2D(0,0);
 	*force = *target - *m_loc;
 	force->normalize();
-	*force *= m_maxForce;
+	*force *= m_maxSpeed;
 	if (mod == 'FLEE')
 		*force *= -1;
 	*force -= *m_vel;
@@ -43,5 +43,6 @@ void Vehicle::update() {
 	*m_acc = Vector2D(0, 0);
 }
 void Vehicle::draw(SDL_Renderer* renderer) {
-	filledTrigonColor(renderer, -m_radius, -m_radius/2, -m_radius, m_radius/2, m_radius, 0, 0xffffffff);
+	filledTrigonColor(renderer, m_loc->getX(), m_loc->getY()+m_radius, m_loc->getX()+(-m_radius)/2, m_loc->getY()+(-m_radius),m_radius/2+ m_loc->getX(), (-m_radius)+ m_loc->getY(), 0xffffffff);
+	
 }
