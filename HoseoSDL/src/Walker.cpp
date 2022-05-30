@@ -7,7 +7,6 @@
 std::random_device rd;
 std::mt19937 gen(rd());
 std::uniform_int_distribution<int> dis(0, 3);
-
 Vehicle* ship = new Vehicle(100, 100);
 Vector2D* mouse;
 
@@ -19,13 +18,13 @@ Walker::Walker(int x, int y)
 
 void Walker::update()
 {
-	//왜 안움직이는거지?!??!????!!
 	mouse = TheInputHandler::Instance()->getMousePosition();
-	Vector2D* steering;
-	steering = ship->seek(mouse, 0);
-	ship->applyForce(steering);
+	Vector2D* arrive = new Vector2D(0,0);
+	//force = ship->seek(mouse, 0);
+	*arrive = ship->Arrive(*mouse, Decel::slow);
+	ship->applyForce(arrive);
 	ship->update();
-	delete(steering);
+	delete(arrive);
 }
 
 void Walker::draw(SDL_Renderer* renderer)
