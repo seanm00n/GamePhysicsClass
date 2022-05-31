@@ -20,10 +20,11 @@ void Walker::update()
 {
 	mouse = TheInputHandler::Instance()->getMousePosition();
 	Vector2D* arrive = new Vector2D(0,0);
-	*arrive = ship->Arrive(*mouse, Decel::slow);
+	*arrive = ship->Arrive(*mouse, Decel::slow);//적용 안되고 있음.
 	ship->applyForce(arrive);
+	//ship->rotate(radian);//어떻게 적용?
 	ship->update();
-	ship->rotate();
+	
 	delete(arrive);
 }
 

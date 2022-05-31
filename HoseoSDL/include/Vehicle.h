@@ -22,7 +22,7 @@ public:
 	Vector2D* seek(Vector2D* target,int mod);
 	void applyForce(Vector2D* force);
 	Vector2D Arrive(Vector2D TargetLoc, Decel decel);
-	void rotate();
+	Vector2D rotate(float radian);
 	void update();
 	void draw(SDL_Renderer* renderer);
 };

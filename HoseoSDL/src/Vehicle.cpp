@@ -45,18 +45,9 @@ Vector2D Vehicle::Arrive(Vector2D TargetLoc, Decel decel) {
 void Vehicle::applyForce(Vector2D* force) {
 	*m_acc += *force;
 }
-void Vehicle::rotate() {
-	//x = l*cos(alpha)
-	//y = l*sin(alpha)
-	//x1 = cos(theta+alpha) = 
-	//l*cos(theta)cos(alpha) - l*sin(theta)sin(alpha)
-	//x*cos(theta) * y*sin(theta)
-	//y1 = sin(theta+alpha) = 
-	//l*sin(theta)cos(alpha)+l*cos(theta)sin(alpha) = 
-	//x*sin(theta) + y*cos(theta)
-	//x1 = x*cos(theta) * y*sin(theta)
-	//y1 = x*sin(theta) + y*cos(theta)
-	//theta = ?;
+Vector2D Vehicle::rotate(float radian) {//어디에 넣어야?
+	return Vector2D(m_loc->getX()*cos(radian) - m_loc->getY()*sin(radian),
+		m_loc->getX()*sin(radian) + m_loc->getY()*cos(radian));
 }
 void Vehicle::update() {
 	*m_vel += *m_acc;
