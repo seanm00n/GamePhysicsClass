@@ -14,7 +14,7 @@ public:
 	Vector2D* m_loc;
 	float m_maxSpeed;
 	float m_maxForce;
-	float m_radius;
+	double m_radius;
 	Decel decel;
 
 	Vehicle(float x, float y);

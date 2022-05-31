@@ -46,7 +46,17 @@ void Vehicle::applyForce(Vector2D* force) {
 	*m_acc += *force;
 }
 void Vehicle::rotate() {
-	//¹Ì±¸Çö
+	//x = l*cos(alpha)
+	//y = l*sin(alpha)
+	//x1 = cos(theta+alpha) = 
+	//l*cos(theta)cos(alpha) - l*sin(theta)sin(alpha)
+	//x*cos(theta) * y*sin(theta)
+	//y1 = sin(theta+alpha) = 
+	//l*sin(theta)cos(alpha)+l*cos(theta)sin(alpha) = 
+	//x*sin(theta) + y*cos(theta)
+	//x1 = x*cos(theta) * y*sin(theta)
+	//y1 = x*sin(theta) + y*cos(theta)
+	//theta = ?;
 }
 void Vehicle::update() {
 	*m_vel += *m_acc;

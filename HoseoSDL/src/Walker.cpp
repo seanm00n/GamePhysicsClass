@@ -20,10 +20,10 @@ void Walker::update()
 {
 	mouse = TheInputHandler::Instance()->getMousePosition();
 	Vector2D* arrive = new Vector2D(0,0);
-	//force = ship->seek(mouse, 0);
 	*arrive = ship->Arrive(*mouse, Decel::slow);
 	ship->applyForce(arrive);
 	ship->update();
+	ship->rotate();
 	delete(arrive);
 }
 
