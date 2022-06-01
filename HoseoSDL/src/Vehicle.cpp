@@ -12,6 +12,9 @@ Vehicle::Vehicle(float x, float y) {
 	m_loc = new Vector2D(x, y);
 	m_vel = new Vector2D(0, 0);
 	m_acc = new Vector2D(0, 0);
+	m_tri1 = new Vector2D(0, 0);
+	m_tri2 = new Vector2D(0, 0);
+	m_tri3 = new Vector2D(0, 0);
 	m_maxSpeed = 12;
 	m_maxForce = 0.25;
 	m_radius = 16;
@@ -45,18 +48,32 @@ Vector2D Vehicle::Arrive(Vector2D TargetLoc, Decel decel) {
 void Vehicle::applyForce(Vector2D* force) {
 	*m_acc += *force;
 }
-Vector2D Vehicle::rotate(float radian) {//어디에 넣어야?
-	return Vector2D(m_loc->getX()*cos(radian) - m_loc->getY()*sin(radian),
-		m_loc->getX()*sin(radian) + m_loc->getY()*cos(radian));
-}
 void Vehicle::update() {
 	*m_vel += *m_acc;
 	m_vel->limit(m_maxSpeed);
 	*m_loc += *m_vel;
 	*m_acc = Vector2D(0, 0);
+
+	*m_tri1 = *m_loc;
+	*m_tri1 += Vector2D(0,m_radius);
+
+	*m_tri2 = *m_loc;
+	*m_tri2 += Vector2D((-m_radius) / 2, -m_radius);
+
+	*m_tri3 = *m_loc;
+	*m_tri3 += Vector2D(m_radius / 2 , -m_radius);
+
+
 }
 void Vehicle::draw(SDL_Renderer* renderer) {
-	filledTrigonColor(renderer, m_loc->getX(), m_loc->getY()+m_radius, 
-		m_loc->getX()+(-m_radius)/2, m_loc->getY()+(-m_radius),
-		m_radius/2+ m_loc->getX(), (-m_radius)+ m_loc->getY(), 0xffffffff);
+	//filledTrigonColor(renderer, 
+	//	m_loc->getX(), m_loc->getY()+m_radius, 
+	//	m_loc->getX()+(-m_radius)/2, m_loc->getY()+(-m_radius),
+	//	m_radius/2+ m_loc->getX(), (-m_radius)+ m_loc->getY(), 
+	//	0xffffffff);
+	filledTrigonColor(renderer, 
+		m_tri1->getX(), m_tri1->getY(), 
+		m_tri2->getX(), m_tri2->getY(), 
+		m_tri3->getX(), m_tri3->getY(),
+		0xffffffff);
 }

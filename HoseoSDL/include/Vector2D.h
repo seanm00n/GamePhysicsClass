@@ -96,6 +96,10 @@ public:
         m_y /= scalar;
         return *this;
     }
+    Vector2D rotate(float radian) {
+        return Vector2D(this->getX() * cos(radian) - this->getY() * sin(radian),
+                        this->getX() * sin(radian) + this->getY() * cos(radian));
+    }
     void normalize()
     {
         float l = length();
