@@ -12,10 +12,7 @@ Vehicle::Vehicle(float x, float y) {
 	m_loc = new Vector2D(x, y);
 	m_vel = new Vector2D(0, 0);
 	m_acc = new Vector2D(0, 0);
-	m_tri1 = new Vector2D(0, 0);
-	m_tri2 = new Vector2D(0, 0);
-	m_tri3 = new Vector2D(0, 0);
-	m_maxSpeed = 12;
+	m_maxSpeed = 9;
 	m_maxForce = 0.25;
 	m_radius = 16;
 }
@@ -33,15 +30,15 @@ Vector2D* Vehicle::seek(Vector2D* target, int mod) {
 	force->limit(m_maxForce);
 	return force;
 }
-Vector2D Vehicle::Arrive(Vector2D TargetLoc, Decel decel) {
-	Vector2D force = TargetLoc - *m_loc;
+Vector2D Vehicle::Arrive(Vector2D mouse) {
+	Vector2D force = mouse - *m_loc;
 	double dist = force.length();
 	if (dist > 0) {
 		const double DecelT = 0.3;
-		float speed = dist / (static_cast<double>(decel) * DecelT);
+		float speed = dist / 1 * DecelT;
 		speed = min(speed, m_maxSpeed);
-		Vector2D des = force * speed/dist;//normalize()
-		return (des - *m_vel);
+		Vector2D desire = force * speed/dist;//normalize()
+		return (desire - *m_vel);
 	}
 	return Vector2D(0, 0);
 }
@@ -53,27 +50,11 @@ void Vehicle::update() {
 	m_vel->limit(m_maxSpeed);
 	*m_loc += *m_vel;
 	*m_acc = Vector2D(0, 0);
-
-	*m_tri1 = *m_loc;
-	*m_tri1 += Vector2D(0,m_radius);
-
-	*m_tri2 = *m_loc;
-	*m_tri2 += Vector2D((-m_radius) / 2, -m_radius);
-
-	*m_tri3 = *m_loc;
-	*m_tri3 += Vector2D(m_radius / 2 , -m_radius);
-
-
 }
 void Vehicle::draw(SDL_Renderer* renderer) {
-	//filledTrigonColor(renderer, 
-	//	m_loc->getX(), m_loc->getY()+m_radius, 
-	//	m_loc->getX()+(-m_radius)/2, m_loc->getY()+(-m_radius),
-	//	m_radius/2+ m_loc->getX(), (-m_radius)+ m_loc->getY(), 
-	//	0xffffffff);
 	filledTrigonColor(renderer, 
-		m_tri1->getX(), m_tri1->getY(), 
-		m_tri2->getX(), m_tri2->getY(), 
-		m_tri3->getX(), m_tri3->getY(),
+		m_loc->getX(), m_loc->getY()+m_radius, 
+		m_loc->getX()+(-m_radius)/2, m_loc->getY()+(-m_radius),
+		m_radius/2+ m_loc->getX(), (-m_radius)+ m_loc->getY(), 
 		0xffffffff);
 }

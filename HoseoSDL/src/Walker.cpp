@@ -19,15 +19,12 @@ Walker::Walker(int x, int y)
 void Walker::update()
 {
 	mouse = TheInputHandler::Instance()->getMousePosition();
-	//Vector2D* arrive = new Vector2D(0,0);
-	//*arrive = ship->Arrive(*mouse, Decel::slow);//적용 안되고 있음.
-	//ship->applyForce(arrive);
-	//ship->update();
-	ship->m_tri1->rotate(10);
-	ship->m_tri2->rotate(10);
-	ship->m_tri3->rotate(10);
+	Vector2D* arrive = new Vector2D(0,0);
+	*arrive = ship->Arrive(*mouse);
+	ship->applyForce(arrive);
+	ship->update();
 	
-	//delete(arrive);
+	delete(arrive);
 }
 
 void Walker::draw(SDL_Renderer* renderer)
